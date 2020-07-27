@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>X Flight configurator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="apparence.js"></script>
+                
+</head>
+  <body id="body_main" onload="initialize()">
+    <img id="logo_app" src="eagle_flight.jpg" width="90px" height="60px" alt="">
+    <h4 id="app_name">EagleFlight</h4>
+    <nav class="navbar navbar-light bg-light" style="background-color: black;">
+      <span class="navbar-brand mb-0 h1"></span>
+    </nav>
+    <div id="pid_block">
+      <div style="height: 1px;"></div>
+        <h5 style="margin-left: 2%;">PID gains</h5>
+        <table class="centered" style="margin-top: 2%;">
+          <thead>
+            <tr>
+                <th> </th>
+                <th>P</th>
+                <th>I</th>
+                <th>D</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr>
+              <td style="font-weight: bold;">Pitch</td>
+              <td><div style="width: 58%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="1.00"  step="0.01"  id="pitch_p"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 26%; margin-top: -17%; height: 20px;"><input type="number" value="0.002" step="0.001" id="pitch_i"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="0.00"  step="0.01"  id="pitch_d"></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Roll</td>
+              <td><div style="width: 58%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="1.00"  step="0.01"  id="roll_p"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 26%; margin-top: -17%; height: 20px;"><input type="number" value="0.002" step="0.001" id="roll_i"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="0.00"  step="0.01"  id="roll_d"></div></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Yaw</td>
+              <td><div style="width: 58%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="2.00"  step="0.01"  id="yaw_p"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 26%; margin-top: -17%; height: 20px;"><input type="number" value="0.02" step="0.001" id="yaw_i"></div></td>
+              <td><div style="width: 55%; float: left; margin-left: 25%; margin-top: -17%; height: 20px;"><input type="number" value="0.00"  step="0.01"  id="yaw_d"></div></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="switch_area">
+      <div style="height: 0.1%;"></div>
+      <h5 style="margin-left: 3%;">Flight settings</h5>
+      <div id="switch_b">
+        <div class="switch">
+            <p id="spin_min">Spin at min throttle</p>
+            <div style="float: left; margin-left: 50%; margin-top: -9%;">
+              <label>
+                <input id="min_spin_rpm" onclick="handle_toggles(this.id)" type="checkbox">
+                <span class="lever"></span>
+              </label>
+            </div>
+        </div>
+
+        <div style="height: 1px;"></div>
+        <div class="divider" style="width: 96%; margin-left: 2%; float: left; margin-top: -0.5%;"></div>
+
+        <div class="switch">
+          <p id="spin_min">Acro</p>
+            <div style="float: left; margin-left: 50%; margin-top: -9%;">
+              <label>
+                <input id="acro_toggle" onclick="handle_toggles(this.id)" type="checkbox">
+                <span class="lever"></span>
+              </label>
+            </div>
+        </div>
+
+        <div style="height: 1px;"></div>
+        <div class="divider" style="width: 96%; margin-left: 2%; float: left; margin-top: -0.5%;"></div>
+
+        <div class="switch">
+          <p id="spin_min">Stabilized</p>
+            <div style="float: left; margin-left: 50%; margin-top: -9%;">
+              <label>
+                <input id="stabilized_toggle" onclick="handle_toggles(this.id)" type="checkbox">
+                <span class="lever"></span>
+              </label>
+            </div>
+        </div>    
+
+    </div>
+
+    <div style="height: 1px;"></div>
+    <div class="divider" style="width: 96%; margin-left: 2%; float: left; margin-top: -0.5%;"></div>
+
+    <div class="input-group input-group-sm mb-3" style="margin-top: 1%;" >
+      <div class="input-group-prepend" style="margin-left: 5%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Minimum RPM</span>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -5.3%;">
+        <input id="min_rpm" style="height: 25px;" onchange="handle_toggles(this.id)" type="number" value="1010" step="1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+
+    <div style="height: 8px;"></div>
+    <div class="divider" style="width: 96%; margin-left: 2%; margin-top: 0.4%;"></div>
+
+
+    <div class="input-group input-group-sm mb-3" >
+      <div class="input-group-prepend" style="margin-left: 5%; margin-top: 1.3%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Deadband UB</span>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -5%;">
+        <input id="db_ub" style="height: 25px;" onchange="handle_deadbands()" type="number" value="1508" step="1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+
+    <div style="height: 8px;"></div>
+    <div class="divider" style="width: 96%; margin-left: 2%; margin-top: 0.4%;"></div>
+
+    <div class="input-group input-group-sm mb-3" >
+      <div class="input-group-prepend" style="margin-left: 5%; margin-top: 1.3%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Deadband LB</span>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -5.4%;">
+        <input id="db_lb" style="height: 25px;" onchange="handle_deadbands()" type="number" value="1492" step="1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+
+    <div style="height: 8px;"></div>
+    <div class="divider" style="width: 96%; margin-left: 2%; margin-top: 0.4%;"></div>
+
+    <div class="input-group input-group-sm mb-3" >
+      <div class="input-group-prepend" style="margin-left: 5%; margin-top: 1.3%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Compl. filter &#945</span>
+        <p style="margin-left: 40%; margin-top: -5%;">Gyro</p>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -8.2%;">
+        <input id="gyro_a" style="height: 25px;" onchange="handle_compl_flt_alpha(this.id)" type="number" value="0.998" step="0.001" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <p style="margin-left: 72%; margin-top: -8%;">Accel</p>
+      <div style="float: left; margin-left: 83%; width: 15%; margin-top: -8.3%;">
+        <input id="accel_a" style="height: 25px;" onchange="handle_compl_flt_alpha(this.id)" type="number" value="0.002" step="0.001" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+
+    <div class="divider" style="width: 96%; margin-left: 2%; height: 0.5px; margin-top: -1.3%;"></div>
+
+    <div class="input-group input-group-sm mb-3" >
+      <div class="input-group-prepend" style="margin-left: 5%; margin-top: 1%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Control loop speed</span>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -5.5%;">
+      
+        <!-- Dropdown Trigger -->
+        <button class='dropdown-trigger btn btn-small' href='#' data-target='dropdown1' id="dr1"><p id="sel_dr1">Select</p></button>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown1' class='dropdown-content'>
+          <li><a href="#!" id="250" onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">250 Hz</a></li>
+          <li><a href="#!" id="500" onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">500 Hz</a></li>
+          <li><a href="#!" id="1"   onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">1 KHz</a></li>
+          <li><a href="#!" id="2"   onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">2 KHz</a></li>
+          <li><a href="#!" id="4"   onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">4 KHz</a></li>
+          <li><a href="#!" id="8"   onclick="change_controller_speed(this.id)" style="color: black; font-size: 12px; width: 70%;">8 KHz</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div style="height: 1px;"></div>
+    <div class="divider" style="width: 96%; margin-left: 2%; margin-top: 1%;"></div>
+
+    <div class="input-group input-group-sm mb-3" >
+      <div class="input-group-prepend" style="margin-left: 5%; margin-top: 1%;">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Bounding angle</span>
+      </div>
+      <div style="float: left; margin-left: 53%; width: 15%; margin-top: -5.5%;">
+      
+        <!-- Dropdown Trigger -->
+        <button class='dropdown-trigger btn btn-small' href='#' data-target='dropdown2' id="dr2"><p id="sel_dr2">Select</p></button>
+
+        <!-- Dropdown Structure -->
+        <ul id='dropdown2' class='dropdown-content'>
+          <li><a href="#!" id="10" onclick="change_bounding_angle(this.id)" style="color: black; font-size: 12px; width: 70%;">10 &deg</a></li>
+          <li><a href="#!" id="15" onclick="change_bounding_angle(this.id)" style="color: black; font-size: 12px; width: 70%;">15 &deg</a></li>
+          <li><a href="#!" id="35" onclick="change_bounding_angle(this.id)" style="color: black; font-size: 12px; width: 70%;">35 &deg</a></li>
+          <li><a href="#!" id="45" onclick="change_bounding_angle(this.id)" style="color: black; font-size: 12px; width: 70%;">45 &deg</a></li>
+        </ul>
+
+      </div>
+    </div>    
+
+    </div>
+
+    <div id="graph_area">
+      <h5 style="margin-left: 2%;">
+        Rate function
+      </h5>
+      <div id="function_area">
+        <!-- Il grafico dei rates è aggiorato dinamicamente -->
+      </div>
+    </div>
+
+
+
+    <div id="setpoint_area">
+      <h5 style="margin-left: 3%;">Setpoint rates</h5>
+      <div style="margin-top: 5%;"></div>
+
+      <div class="input-group input-group-sm mb-3" >
+        <div class="input-group-prepend" style="margin-left: 5%; margin-top: 3.5%;">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Pitch rate</span>
+        </div>
+        <div style="float: left; margin-left: 53%; width: 15%; margin-top: -8%;">
+          <input id="pitch_rate" onchange="rate_rendering()" type="number" value="3" step="0.1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <p id="p_rate" style="margin-left: 77%; margin-top: -5%;">Rate:</p>
+      </div>
+
+      <div style="height: 2px;"></div>
+      <div class="divider" style="width: 96%; margin-left: 2%;"></div>
+
+      <div class="input-group input-group-sm mb-3" >
+        <div class="input-group-prepend" style="margin-left: 5%; margin-top: 3.5%;">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Roll rate</span>
+        </div>
+        <div style="float: left; margin-left: 53%; width: 15%; margin-top: -8%;">
+          <input id="roll_rate" onchange="rate_rendering()" type="number" value="3" step="0.1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <p id="r_rate" style="margin-left: 77%; margin-top: -5%;">Rate:</p>
+      </div>
+
+      <div style="height: 2px;"></div>
+      <div class="divider" style="width: 96%; margin-left: 2%;"></div>
+
+      <div class="input-group input-group-sm mb-3" >
+        <div class="input-group-prepend" style="margin-left: 5%; margin-top: 3.5%;">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Yaw rate</span>
+        </div>
+        <div style="float: left; margin-left: 53%; width: 15%; margin-top: -8%;">
+          <input id="yaw_rate" onchange="rate_rendering()" type="number" value="3" step="0.1" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <p id="y_rate" style="margin-left: 77%; margin-top: -5%;">Rate:</p>
+      </div>   
+
+    </div>
+
+    <div id="footer">
+      <p id="signature">Developed by Edoardo Cittadini</p>
+    </div>
+
+    <a id="flash_btn" class="btn-floating btn-small" onclick="flash_firmware()"><i class="material-icons">memory</i></a>
+
+</body>
+</html>

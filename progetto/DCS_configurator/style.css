@@ -1,0 +1,154 @@
+
+#body_main{
+    background-color: white;
+}
+
+#pid_block{
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 52%;
+    border-radius: 5px;
+    border-color: black;
+    background-color: #D3D3D3;
+}
+
+#switch_area{
+    margin-right: 1%;
+    width: 45%;
+    height: 427px;
+    margin-left: 54%;
+    margin-top: -25.85%;
+    background-color: #D3D3D3;
+    border-radius: 5px;
+}
+
+#graph_area{
+    float: left;
+    width: 52%;
+    height: 380px;
+    margin-top: -16%;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 5px;
+    border: solid 1px;
+    border-color: black;
+}
+
+
+#setpoint_area{
+    float: left;
+    background-color: #D3D3D3;
+    width: 45%;
+    height: 210px;
+    margin-left: 54%;
+    margin-top: -21%;
+    border-radius: 5px;
+
+}
+
+
+
+#info_nav{
+    background-color: #14f5e6;
+    width: 100%;
+    font-size:25px;
+    height: auto;
+}
+
+#bar_d{
+    margin-left: 1%;
+    padding-top: 0.7%;
+}
+
+#description{
+    border:1px solid #999999;
+    color: black;
+    font-size:16px;
+    width:100%;
+    position: relative;
+    display: inline-block;
+    height: auto;
+   }
+
+#info_img{
+    margin-left: 5%;
+}
+
+#sep{
+    margin-right: 12%;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+input:focus {
+    border-bottom: 1px solid black !important;
+    box-shadow: 0 1px 0 0 black !important;
+}
+
+#switch_b{
+    margin-top: 5%;
+}
+
+#spin_min{
+    width: 40%;
+    margin-left: 5%;
+}
+
+#dr1, #dr2{
+    height: 20px;
+    color: transparent;
+    background-color: transparent;
+    border-radius: 10px;
+    border: solid 1px black;
+    width: 99%;
+}
+
+#sel_dr1, #sel_dr2{
+    float: left;
+    color: black;
+    font-size: 10;
+    margin-left: -75%;
+    margin-top: -23%;
+    width: 80px;
+}
+
+#dr2{
+    margin-top: 6%;
+}
+
+#footer{
+    background-color: gray;
+    height: 25px;
+    margin-top: 23.9%;
+}
+
+#signature{
+    margin-left: 75%;
+    color: white;
+    font-style: italic;
+}
+
+#flash_btn{
+    float: left;
+    margin-top: -76%;
+    margin-left: 94%;
+    background-color: #EC3317;
+}
+
+#logo_app{
+    float: left;
+    margin-top: 0.35%;
+    margin-left: 1.5%;
+}
+
+#app_name{
+    float: left;
+    margin-left: 1.2%;
+    margin-top: 1.5%;
+    font-style: italic;
+    font-size: 20pt;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #EC3317;
+}

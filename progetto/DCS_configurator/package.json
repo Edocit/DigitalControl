@@ -1,0 +1,21 @@
+{
+  "name": "flight_configurator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Edoardo Cittadini",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.3"
+  },
+  "dependencies": {
+    "d3": "^3.5.17",
+    "fs": "0.0.1-security",
+    "function-plot": "^1.19.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "serialport": "^9.0.0"
+  }
+}
